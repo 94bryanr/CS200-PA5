@@ -7,11 +7,14 @@ public class PA5 {
 	public static void main(String[] args) {
 		try {
 			File file = new File(args[0]);
-			//TODO: Add an error check for no arguments!
-			Scanner scan;
-			scan = new Scanner(file);
+			Scanner scan = new Scanner(file);
+
+			//Get output name
 			String nextArg = scan.nextLine();
-			
+			String output = nextArg;
+
+			//Get hash size
+			nextArg = scan.nextLine();
 			Integer hashSize = new Integer(nextArg);
 			nextArg = scan.nextLine();
 			
