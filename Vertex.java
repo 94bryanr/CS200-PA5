@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-//RandomComment
+
 public class Vertex{
     private String name;
     private ArrayList<Link> links;

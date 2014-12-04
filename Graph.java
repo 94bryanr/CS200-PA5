@@ -6,7 +6,6 @@ public class Graph{
     
     public Graph(){
         //Constructor placeholder
-    	 System.out.println("HERE");
     }
 
     public static ArrayList<Vertex> getVertices() {
