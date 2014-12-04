@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class Graph{
     private static ArrayList<Vertex> verticies;
-
+    
+    
     public Graph(){
         //Constructor placeholder
+    	 System.out.println("HERE");
     }
 
     public static ArrayList<Vertex> getVertices() {
