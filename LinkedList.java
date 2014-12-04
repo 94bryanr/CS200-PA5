@@ -5,13 +5,17 @@
 // P0 
 public class LinkedList {
 	
-	public Node head;
+	private Node head;
 	private int size; 
 	
 	public LinkedList()
 	{
 		head=null;
 		size=0;
+	}
+
+	public Node getHead() {
+		return head;
 	}
 
 	public void add(String s)
@@ -38,5 +42,4 @@ public class LinkedList {
 			temp.setNext(n);
 		}
 	}
-
 }

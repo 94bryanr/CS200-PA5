@@ -24,8 +24,10 @@ public class HashTable implements TermIndex, Iterable<Term> {
 		word.incFrequency(filename);
         if(search(newWord) != -1)
             hashTable[search(newWord)].incFrequency(filename);
-        else
-		    add(word);
+        else {
+            //Word was not found
+            add(word);
+        }
 	}
 
     private void add(Term term)
@@ -132,7 +134,7 @@ public class HashTable implements TermIndex, Iterable<Term> {
         return Math.abs(index);
     }
 	
-	// will change size to 2*currentSize+1 and will rehash each item
+	/*Rehash() will change size to 2*currentSize+1 and will rehash each item*/
 	private void rehash(){
         //System.out.println("REHASH: New Size: " + hashTable.length*2);
         itemCounter = 0;

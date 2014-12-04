@@ -39,7 +39,7 @@ public class Term {
 				first = first.getNext();
 			}
 			
-			first = list.head;
+			first = list.getHead();
 			
 			//if empty, insert occurrence
 			if(first == null){
@@ -56,7 +56,7 @@ public class Term {
 			}
 			
 			//resets first to front of linked list
-			first = list.head;
+			first = list.getHead();
 		}
 		
 		public double[] fillTFIDFarray(){
@@ -77,7 +77,7 @@ public class Term {
 				first = first.getNext();
 			}
 			//set first back to head of linked list
-			first = this.list.head;
+			first = this.list.getHead();
 			// return list of TFIDF and document names;
 			return  TFIDFarray;
 		}
@@ -86,7 +86,7 @@ public class Term {
 		public String[] fillDocArray(){
 			String[] docs = new String[docFrequency];
 			int index = 0;
-			first = this.list.head;
+			first = this.list.getHead();
 			// loop through linked list of document names
 			while(first != null){
 				//adding document name to array
@@ -96,7 +96,7 @@ public class Term {
 				first = first.getNext();
 			}
 			//set first back to head of linked list
-			first = this.list.head;
+			first = this.list.getHead();
 			// return list of TFIDF and document names;
 			return docs;
 		}
