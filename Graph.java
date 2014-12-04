@@ -1,1 +1,3 @@
-//Placeholder Graph Class
+public class Graph{
+
+        }
