@@ -11,6 +11,7 @@ public class Link {
             if(vertexCurrent.getName().equals(toVertex)){
                 //Vertex exists
                 this.toVertex = vertexCurrent;
+                this.toVertex.increaseInDegree();
             }
         }
 
@@ -18,9 +19,6 @@ public class Link {
         Vertex newVertex = new Vertex(toVertex);
         Graph.addVertex(newVertex);
         this.toVertex = newVertex;
-    }
-
-    public void setToVertex(Vertex newVertex){
-        toVertex = newVertex;
+        this.toVertex.increaseInDegree();
     }
 }

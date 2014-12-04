@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Graph{
     private static ArrayList<Vertex> verticies;
     
-    
     public Graph(){
         //Constructor placeholder
     }
