@@ -55,7 +55,7 @@ public class WebPages{
 		
 		try{
 			File fileIn = new File(filename);
-			Scanner firstscan = new Scanner(fileIn).useDelimiter("href=\"http://.+\"");
+			Scanner firstscan = new Scanner(fileIn).useDelimiter("^(?!.*(href=\"http://.+\")).*$");
 			//ArrayList<String> html = new ArrayList<String>();
 			//String file = "href=\"http://simple5a.txt\"";
 

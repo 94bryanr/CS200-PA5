@@ -12,6 +12,8 @@ public class PA5 {
 			//Get output name
 			String nextArg = scan.nextLine();
 			String output = nextArg;
+			
+			Graph graph = new Graph();
 
 			//Get hash size
 			nextArg = scan.nextLine();
@@ -45,7 +47,7 @@ public class PA5 {
 				String[] pages = web.bestPages(nextArg.toLowerCase());
 				String[] query = web.fillQueryArray(nextArg.toLowerCase());
 				Arrays.sort(query);
-				if(pages == null){
+				if(pages[0] == null){
 					System.out.println("[" + nextArg + " ]" + " not found");
 				}
 				else{
@@ -66,7 +68,7 @@ public class PA5 {
 			}
 
 			//Test Graph
-			Graph graph = new Graph();
+			//Graph graph = new Graph();
 			graph.addVertex(new Vertex("Vert1"));
 
 			graph.getVertex("Vert1").addLink(new Link("Vert2"));
