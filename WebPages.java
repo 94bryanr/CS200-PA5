@@ -58,6 +58,7 @@ public class WebPages{
 		
 		try{
 			File fileIn = new File(filename);
+
 			String fullFile = buildStringFromFile(filename);
 			ArrayList<String> htmlLinks = getHtmlLinks(fullFile);
 			//Make a vertex for the file
