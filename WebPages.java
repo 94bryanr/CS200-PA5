@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -50,8 +51,21 @@ public class WebPages{
 		// sort docs array alphabetically
 		Arrays.sort(docs);
 		
+		
+		
 		try{
 			File fileIn = new File(filename);
+			Scanner firstscan = new Scanner(fileIn).useDelimiter("href=\"http://.+\"");
+			//ArrayList<String> html = new ArrayList<String>();
+			//String file = "href=\"http://simple5a.txt\"";
+
+			System.out.println("---------------------");
+			while(firstscan.hasNext()){
+				String next = firstscan.next();
+				System.out.println(next);
+			}
+			System.out.println("---------------------");
+			
 			//Scanning file using delimiter
 			Scanner scan = new Scanner(fileIn).useDelimiter("<[^>]+>|[^0-9a-zA-Z']");
 			//looping through file and adding words
@@ -172,9 +186,5 @@ public class WebPages{
 	 
 	 public double wiq(int numTotalDocuments, int numDocumentsPerTerm, Term term){
 		 return .5*(1+Math.log(((double)(numTotalDocuments/numDocumentsPerTerm))));
-	 }
-	 
-	 public double wid(Term term){
-		 return term.tfidf;
 	 }
 }
