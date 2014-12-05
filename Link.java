@@ -21,4 +21,8 @@ public class Link {
         this.toVertex = newVertex;
         this.toVertex.increaseInDegree();
     }
+
+    public Vertex getToVertex() {
+        return toVertex;
+    }
 }

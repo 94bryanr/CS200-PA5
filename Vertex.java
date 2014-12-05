@@ -7,6 +7,7 @@ public class Vertex{
 
     public Vertex(String name){
         this.name = name;
+        this.links = new ArrayList<Link>();
         this.inDegree = 0;
     }
 
@@ -16,6 +17,10 @@ public class Vertex{
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Link> getLinks() {
+        return links;
     }
 
     public int getInDegree() {

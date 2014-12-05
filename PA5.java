@@ -66,6 +66,21 @@ public class PA5 {
 				}
 			}
 
+			//Test Graph
+			Graph graph = new Graph();
+			graph.addVertex(new Vertex("Vert1"));
+
+			graph.getVertex("Vert1").addLink(new Link("Vert2"));
+			graph.getVertex("Vert2").addLink(new Link("Vert3"));
+			graph.getVertex("Vert1").addLink(new Link("Vert3"));
+			graph.getVertex("Vert2").addLink(new Link("Vert2"));
+			System.out.printf("In degree of %s is %d\n", "Vert1", Graph.getInDegree("Vert1"));
+			System.out.printf("In degree of %s is %d\n", "Vert2", Graph.getInDegree("Vert2"));
+			System.out.printf("In degree of %s is %d\n", "Vert3", Graph.getInDegree("Vert3"));
+			Graph.outputGraphFile(output);
+			//Order vertices alphabetically
+			//Keep order of edges the same
+
 			scan.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
