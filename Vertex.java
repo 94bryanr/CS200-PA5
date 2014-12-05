@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Vertex{
+public class Vertex implements Comparable{
     private String name;
     private ArrayList<Link> links;
     private int inDegree;
@@ -29,5 +29,10 @@ public class Vertex{
 
     public void increaseInDegree(){
         this.inDegree++;
+    }
+
+    @Override
+    public int compareTo(Object vertex) {
+        return this.getName().compareTo(((Vertex)vertex).getName());
     }
 }

@@ -40,7 +40,6 @@ public class PA5 {
 			System.out.println();
 			//web.getHashTable().printDetailedTable();
 
-
 			//scanning though all whichPages words
 			while(!(nextArg == null)){
 				String[] pages = web.bestPages(nextArg.toLowerCase());
@@ -74,11 +73,24 @@ public class PA5 {
 			graph.getVertex("Vert2").addLink(new Link("Vert3"));
 			graph.getVertex("Vert1").addLink(new Link("Vert3"));
 			graph.getVertex("Vert2").addLink(new Link("Vert2"));
+
+			//Order vertices alphabetically
+			graph.addVertex(new Vertex("Apple"));
+			graph.getVertex("Apple").addLink(new Link("Vert3"));
+			graph.addVertex(new Vertex("Carrot"));
+			graph.getVertex("Carrot").addLink(new Link("Vert3"));
+			graph.addVertex(new Vertex("Wobble"));
+			graph.getVertex("Wobble").addLink(new Link("Vert3"));
+			graph.addVertex(new Vertex("Zapper"));
+			graph.getVertex("Zapper").addLink(new Link("Vert3"));
+			graph.addVertex(new Vertex("Tibby"));
+
 			System.out.printf("In degree of %s is %d\n", "Vert1", Graph.getInDegree("Vert1"));
 			System.out.printf("In degree of %s is %d\n", "Vert2", Graph.getInDegree("Vert2"));
 			System.out.printf("In degree of %s is %d\n", "Vert3", Graph.getInDegree("Vert3"));
+
 			Graph.outputGraphFile(output);
-			//Order vertices alphabetically
+
 			//Keep order of edges the same
 
 			scan.close();

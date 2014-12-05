@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Graph{
     private static ArrayList<Vertex> verticies;
@@ -17,6 +19,8 @@ public class Graph{
 
     public static void addVertex(Vertex newVertex){
         verticies.add(newVertex);
+        //Reorder vertices alphabetically
+        Collections.sort(verticies);
     }
 
     public static Vertex getVertex(String name) {
