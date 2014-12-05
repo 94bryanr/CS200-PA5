@@ -1,13 +1,17 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WebPages{
 
 	private HashTable hashTable;
+	private Graph graph;
 	public static int totalDoc = 0;
 	
 	// arrays for Sim calculation
@@ -24,6 +28,7 @@ public class WebPages{
 	public WebPages(int hashSize){
 		// creating hash table with temp value
 		hashTable = new HashTable(hashSize);
+		graph = new Graph();
 	}
 	
 	public HashTable getHashTable(){
@@ -51,21 +56,24 @@ public class WebPages{
 		// sort docs array alphabetically
 		Arrays.sort(docs);
 		
-		
-		
 		try{
 			File fileIn = new File(filename);
 			Scanner firstscan = new Scanner(fileIn).useDelimiter("^(?!.*(href=\"http://.+\")).*$");
 			//ArrayList<String> html = new ArrayList<String>();
 			//String file = "href=\"http://simple5a.txt\"";
 
-			System.out.println("---------------------");
-			while(firstscan.hasNext()){
-				String next = firstscan.next();
-				System.out.println(next);
+
+			String fullFile = buildStringFromFile(filename);
+			ArrayList<String> htmlLinks = getHtmlLinks(fullFile);
+			//Make a vertex for the file
+			Vertex fileVertex = new Vertex(filename);
+			//Update its edges
+			for(String fileLink: htmlLinks){
+				fileVertex.addLink(new Link(fileLink));
 			}
-			System.out.println("---------------------");
-			
+			//Add vertex to graph
+			Graph.addVertex(fileVertex);
+
 			//Scanning file using delimiter
 			Scanner scan = new Scanner(fileIn).useDelimiter("<[^>]+>|[^0-9a-zA-Z']");
 			//looping through file and adding words
@@ -83,6 +91,46 @@ public class WebPages{
 			System.out.println("Error: File Not Found");
 			e.printStackTrace();
 		}
+	}
+
+	private ArrayList<String> getHtmlLinks(String string){
+		//ArrayList to hold links
+		ArrayList<String> htmlLinks = new ArrayList<String>();
+		Matcher htmlMatches = Pattern.compile("<a +href=\"[^>]+>").matcher(string);
+		while(htmlMatches.find()){
+			htmlLinks.add(htmlMatches.group());
+		}
+		htmlLinks = trimLinks(htmlLinks);
+		return htmlLinks;
+	}
+
+	private ArrayList<String> trimLinks(ArrayList<String> untrimmed) {
+		ArrayList<String> fileLinks = new ArrayList<String>();
+		for(String link: untrimmed) {
+			//System.out.println("\nFull: " + link);
+			String[] linkArray = link.trim().split("<a *href=\"http://");
+			if (linkArray.length == 2) {
+				link = linkArray[1].substring(0, linkArray[1].length() - 2);
+				if (!link.trim().equals("")) {
+					fileLinks.add(link);
+				}
+			}
+		}
+		return fileLinks;
+	}
+
+	private String buildStringFromFile(String filename){
+		String fullFile = "";
+		File fileIn = new File(filename);
+		try {
+			Scanner preScan = new Scanner(fileIn);
+			while (preScan.hasNextLine()){
+				fullFile += preScan.nextLine();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return fullFile;
 	}
 	
 	
