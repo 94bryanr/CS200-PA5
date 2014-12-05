@@ -1,13 +1,21 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class PA5 {
 	public static void main(String[] args) {
 		try {
 			File file = new File(args[0]);
 			Scanner scan = new Scanner(file);
+
+			ArrayList<String> htmlLinks = new ArrayList<String>();
+			Pattern hyperLinkWithAngles = Pattern.compile("<[^>]+>");
+			while (scan.hasNext(hyperLinkWithAngles)){
+				htmlLinks.add(scan.next(hyperLinkWithAngles));
+			}
 
 			//Get output name
 			String nextArg = scan.nextLine();
@@ -65,34 +73,8 @@ public class PA5 {
 				}
 			}
 
-			//Test Graph
-			Graph graph = new Graph();
-			graph.addVertex(new Vertex("Vert1"));
-
-			graph.getVertex("Vert1").addLink(new Link("Vert2"));
-			graph.getVertex("Vert2").addLink(new Link("Vert3"));
-			graph.getVertex("Vert1").addLink(new Link("Vert3"));
-			graph.getVertex("Vert2").addLink(new Link("Vert2"));
-
-			//Order vertices alphabetically
-			graph.addVertex(new Vertex("Apple"));
-			graph.getVertex("Apple").addLink(new Link("Vert3"));
-			graph.addVertex(new Vertex("Carrot"));
-			graph.getVertex("Carrot").addLink(new Link("Vert3"));
-			graph.addVertex(new Vertex("Wobble"));
-			graph.getVertex("Wobble").addLink(new Link("Vert3"));
-			graph.addVertex(new Vertex("Zapper"));
-			graph.getVertex("Zapper").addLink(new Link("Vert3"));
-			graph.addVertex(new Vertex("Tibby"));
-
-			System.out.printf("In degree of %s is %d\n", "Vert1", Graph.getInDegree("Vert1"));
-			System.out.printf("In degree of %s is %d\n", "Vert2", Graph.getInDegree("Vert2"));
-			System.out.printf("In degree of %s is %d\n", "Vert3", Graph.getInDegree("Vert3"));
-
+			//Output the graph file
 			Graph.outputGraphFile(output);
-
-			//Keep order of edges the same
-
 			scan.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
