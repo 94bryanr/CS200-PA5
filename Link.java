@@ -8,18 +8,22 @@ public class Link {
     public Link(String toVertex){
         //Search for existing vertex to link to
         for (Vertex vertexCurrent: Graph.getVertices()){
-            if(vertexCurrent.getName().equals(toVertex)){
+            if(vertexCurrent.getName().equals(toVertex)) {
                 //Vertex exists
                 this.toVertex = vertexCurrent;
                 this.toVertex.increaseInDegree();
+                return;
             }
         }
-
         //No existing vertex exists, create a new vertex
+        linkToNewVertex(toVertex);
+    }
+
+    private void linkToNewVertex(String toVertex){
         Vertex newVertex = new Vertex(toVertex);
-        Graph.addVertex(newVertex);
         this.toVertex = newVertex;
         this.toVertex.increaseInDegree();
+        Graph.addVertex(newVertex);
     }
 
     public Vertex getToVertex() {

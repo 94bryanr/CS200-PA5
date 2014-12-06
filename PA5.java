@@ -78,7 +78,6 @@ public class PA5 {
 			Graph.outputGraphFile(output);
 			scan.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
