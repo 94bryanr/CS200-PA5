@@ -45,10 +45,10 @@ public class PA5 {
 			
 			nextArg = scan.nextLine();
 
-			System.out.println("WORDS");
-			web.printTable();
-			System.out.println();
-			//web.getHashTable().printDetailedTable();
+//			System.out.println("WORDS");
+//			web.printTable();
+//			System.out.println();
+//			//web.getHashTable().printDetailedTable();
 
 			//scanning though all whichPages words
 			while(!(nextArg == null)){
