@@ -45,11 +45,6 @@ public class PA5 {
 			
 			nextArg = scan.nextLine();
 
-//			System.out.println("WORDS");
-//			web.printTable();
-//			System.out.println();
-//			//web.getHashTable().printDetailedTable();
-
 			//scanning though all whichPages words
 			while(!(nextArg == null)){
 				String[] pages = web.bestPages(nextArg.toLowerCase());
@@ -75,7 +70,7 @@ public class PA5 {
 				}
 			}
 
-			Graph.outputGraphFile(output);
+			Graph.writeDotFile(output);
 			scan.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

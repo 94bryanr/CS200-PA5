@@ -60,10 +60,6 @@ public class WebPages{
 
 		try{
 			File fileIn = new File(filename);
-			Scanner firstscan = new Scanner(fileIn).useDelimiter("^(?!.*(href=\"http://.+\")).*$");
-			//ArrayList<String> html = new ArrayList<String>();
-			//String file = "href=\"http://simple5a.txt\"";
-
 
 			String fullFile = buildStringFromFile(filename);
 			ArrayList<String> htmlLinks = getHtmlLinks(fullFile);
@@ -99,7 +95,7 @@ public class WebPages{
 	private ArrayList<String> getHtmlLinks(String string){
 		//ArrayList to hold links
 		ArrayList<String> htmlLinks = new ArrayList<String>();
-		Matcher htmlMatches = Pattern.compile("<a +href=\"[^>]+>").matcher(string);
+		Matcher htmlMatches = Pattern.compile("<a *href=\"[^>]+>").matcher(string);
 		while(htmlMatches.find()){
 			htmlLinks.add(htmlMatches.group());
 		}
@@ -182,7 +178,7 @@ public class WebPages{
 			 //System.out.println("DOC: " + docs[i] + " SIM: " + simValue);
 			 if(simValue >= max){
 				// System.out.println("document: " + docs[i] + " in degree : " + Graph.getInDegree(docs[i]));
-				 max = simValue*Graph.getInDegree(docs[i]);
+				 max = simValue*Graph.inDegree(docs[i]);
 				 returnArray[0] = docs[i];
 				 returnArray[1] = String.valueOf(df.format(max));
 			 }

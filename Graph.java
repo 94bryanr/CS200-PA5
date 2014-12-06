@@ -40,14 +40,14 @@ public class Graph{
         return null;
     }
 
-    public static int getInDegree(String vertexName){
-        return getVertex(vertexName).getInDegree();
+    public static int inDegree(String filename){
+        return getVertex(filename).getInDegree();
     }
 
-    public static void outputGraphFile(String filename){
+    public static void writeDotFile(String outputFile){
         PrintWriter writer;
         try {
-            writer = new PrintWriter(filename, "UTF-8");
+            writer = new PrintWriter(outputFile, "UTF-8");
             //Add first line
             writer.println("digraph program5 {");
             //Iterate through each link in the graph
