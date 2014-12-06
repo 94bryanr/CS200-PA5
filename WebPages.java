@@ -177,7 +177,8 @@ public class WebPages{
 		 for(int i = 0; i < docs.length; i++){
 			 double simValue = sim(common[i], docSpecific[i], queryWeights);
 			 if(simValue >= max){
-				 max = simValue;
+				 System.out.println("document: " + docs[i] + " in degree : " + Graph.getInDegree(docs[i]));
+				 max = simValue*Graph.getInDegree(docs[i]);
 				 returnArray[0] = docs[i];
 				 returnArray[1] = String.valueOf(df.format(max));
 			 }
