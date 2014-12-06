@@ -2,29 +2,32 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Graph{
-    private static ArrayList<Vertex> verticies;
+    private static ArrayList<Vertex> vertices;
     
     public Graph(){
-        this.verticies = new ArrayList<Vertex>();
+        this.vertices = new ArrayList<Vertex>();
     }
 
     public static ArrayList<Vertex>
     getVertices() {
-        return verticies;
+        return vertices;
     }
 
     public static void addVertex(Vertex newVertex){
-        verticies.add(newVertex);
+        vertices.add(newVertex);
         //Reorder vertices alphabetically
-        Collections.sort(verticies);
+        sortVertices();
+    }
+
+    private static void sortVertices(){
+        Collections.sort(vertices);
     }
 
     public static Vertex getVertex(String name) {
-        for(Vertex vertex: verticies){
+        for(Vertex vertex: vertices){
             if(vertex.getName().matches(name)){
                 return vertex;
             }
@@ -48,7 +51,7 @@ public class Graph{
             //Add first line
             writer.println("digraph program5 {");
             //Iterate through each link in the graph
-            for(Vertex vertex: verticies){
+            for(Vertex vertex: vertices){
                 for(Link link: vertex.getLinks()){
                     writer.printf("\"%s\" -> \"%s\";\n", vertex.getName(), link.getToVertex().getName());
                 }
@@ -61,5 +64,14 @@ public class Graph{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String[] getVertexNames(){
+        String[] verticesList = new String[vertices.size()];
+        sortVertices();
+        for(int i = 0; i < vertices.size(); i++){
+            verticesList[i] = vertices.get(i).getName();
+        }
+        return verticesList;
     }
 }

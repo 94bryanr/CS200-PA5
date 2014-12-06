@@ -37,7 +37,7 @@ public class WebPages{
 	
 	//add page to fill in ArrayList
 	public void addPage(String filename){
-		
+
 		// increase number of total documents
 		totalDoc++;
 		// copy docs content to temp array
@@ -55,7 +55,9 @@ public class WebPages{
 		docs[docs.length-1] = filename;
 		// sort docs array alphabetically
 		Arrays.sort(docs);
-		
+
+		Graph.getVertexNames();
+
 		try{
 			File fileIn = new File(filename);
 			Scanner firstscan = new Scanner(fileIn).useDelimiter("^(?!.*(href=\"http://.+\")).*$");
@@ -69,7 +71,8 @@ public class WebPages{
 			Vertex fileVertex = new Vertex(filename);
 			//Update its edges
 			for(String fileLink: htmlLinks){
-				fileVertex.addLink(new Link(fileLink));
+				Link newLink = new Link(fileLink);
+				fileVertex.addLink(newLink);
 			}
 			//Add vertex to graph
 			Graph.addVertex(fileVertex);
