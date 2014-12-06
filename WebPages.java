@@ -60,10 +60,6 @@ public class WebPages{
 
 		try{
 			File fileIn = new File(filename);
-			Scanner firstscan = new Scanner(fileIn).useDelimiter("^(?!.*(href=\"http://.+\")).*$");
-			//ArrayList<String> html = new ArrayList<String>();
-			//String file = "href=\"http://simple5a.txt\"";
-
 
 			String fullFile = buildStringFromFile(filename);
 			ArrayList<String> htmlLinks = getHtmlLinks(fullFile);
@@ -179,8 +175,10 @@ public class WebPages{
 		 // traverse all documents
 		 for(int i = 0; i < docs.length; i++){
 			 double simValue = sim(common[i], docSpecific[i], queryWeights);
+			 //System.out.println("DOC: " + docs[i] + " SIM: " + simValue);
 			 if(simValue >= max){
-				 max = simValue;
+				// System.out.println("document: " + docs[i] + " in degree : " + Graph.getInDegree(docs[i]));
+				 max = simValue*Graph.inDegree(docs[i]);
 				 returnArray[0] = docs[i];
 				 returnArray[1] = String.valueOf(df.format(max));
 			 }
@@ -208,7 +206,7 @@ public class WebPages{
 					 // a) if the term is in query, compute wiq, square it, and add to queryWeights
 					 if(currentTerm.getWord().equals(queryArray[k])){
 						 inquery = true;
-						 double wiqTemp = wiq(totalDoc, currentTerm.docFrequency, currentTerm);
+						 double wiqTemp = (double) wiq(totalDoc, currentTerm.docFrequency, currentTerm);
 						 wiqTemp = wiqTemp*wiqTemp;
 						 queryWeights += wiqTemp;
 					 }
