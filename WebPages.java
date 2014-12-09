@@ -106,7 +106,6 @@ public class WebPages{
 	private ArrayList<String> trimLinks(ArrayList<String> untrimmed) {
 		ArrayList<String> fileLinks = new ArrayList<String>();
 		for(String link: untrimmed) {
-			//System.out.println("\nFull: " + link);
 			String[] linkArray = link.trim().split("<a *href=\"http://");
 			if (linkArray.length == 2) {
 				link = linkArray[1].substring(0, linkArray[1].length() - 2);
@@ -136,7 +135,7 @@ public class WebPages{
 	public void printTable(){
 		for(Term term: hashTable)
         {
-            System.out.println(term.getWord());
+            System.out.println(term.getWord() + " " + term.totalFrequency);
         }
 	}
 
@@ -175,9 +174,7 @@ public class WebPages{
 		 // traverse all documents
 		 for(int i = 0; i < docs.length; i++){
 			 double simValue = sim(common[i], docSpecific[i], queryWeights);
-			 //System.out.println("DOC: " + docs[i] + " SIM: " + simValue);
 			 if(simValue >= max){
-				// System.out.println("document: " + docs[i] + " in degree : " + Graph.getInDegree(docs[i]));
 				 max = simValue*Graph.inDegree(docs[i]);
 				 returnArray[0] = docs[i];
 				 returnArray[1] = String.valueOf(df.format(max));
@@ -193,6 +190,7 @@ public class WebPages{
 
 	 // fills queryWeights, docSpecific, and common
 	 public void traversal(String query){
+		 
 		 // fill queryArray
 		 String[] queryArray = fillQueryArray(query);
 
@@ -217,15 +215,16 @@ public class WebPages{
 				 double[] tfidfValues = currentTerm.fillTFIDFarray();
 				 // for each document that contains term
 				 for(int a = 0; a < termDocuments.length; a++){
+					 //System.out.println("HERE : " + currentTerm.getWord() + " " + termDocuments[a]);
 					 // i. compute wid value, square it, and add to doc position
-					 double wid = tfidfValues[a];
+					 double wid = (double) tfidfValues[a];
 					 wid = wid*wid;
 					 int docposition = Arrays.asList(docs).indexOf(termDocuments[a]);
 					 docSpecific[docposition] += wid;
 					 
 					 // if term is in doc & query
 					 if(inquery == true){
-						 double commonValue = tfidfValues[a]*((double)wiq(totalDoc, currentTerm.docFrequency, currentTerm));
+						 double commonValue = (double)tfidfValues[a]*((double)wiq(totalDoc, currentTerm.docFrequency, currentTerm));
 						 common[docposition] += commonValue;
 					 }
 				 }
@@ -234,6 +233,6 @@ public class WebPages{
 	 }
 	 
 	 public double wiq(int numTotalDocuments, int numDocumentsPerTerm, Term term){
-		 return .5*(1+Math.log(((double)(numTotalDocuments/numDocumentsPerTerm))));
+		 return 0.5*(1+Math.log(((double)((double)numTotalDocuments/(double)numDocumentsPerTerm))));
 	 }
 }
