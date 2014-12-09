@@ -47,7 +47,7 @@ public class Graph{
     public static void writeDotFile(String outputFile){
         PrintWriter writer;
         try {
-            writer = new PrintWriter(outputFile, "UTF-8");
+            writer = new PrintWriter(outputFile + ".dot", "UTF-8");
             //Add first line
             writer.println("digraph program5 {");
             //Iterate through each link in the graph

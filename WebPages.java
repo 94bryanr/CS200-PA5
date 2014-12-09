@@ -97,7 +97,7 @@ public class WebPages{
 		ArrayList<String> htmlLinks = new ArrayList<String>();
 		Matcher htmlMatches = Pattern.compile("<a *href=\"[^>]+>").matcher(string);
 		while(htmlMatches.find()){
-			htmlLinks.add(htmlMatches.group());
+			htmlLinks.add(htmlMatches.group().toLowerCase());
 		}
 		htmlLinks = trimLinks(htmlLinks);
 		return htmlLinks;
@@ -110,7 +110,7 @@ public class WebPages{
 			if (linkArray.length == 2) {
 				link = linkArray[1].substring(0, linkArray[1].length() - 2);
 				if (!link.trim().equals("")) {
-					fileLinks.add(link);
+					fileLinks.add(link.toLowerCase());
 				}
 			}
 		}
